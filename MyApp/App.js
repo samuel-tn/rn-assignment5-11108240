@@ -1,52 +1,58 @@
+import * as React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { ThemeProvider, ThemeContext } from './components/ThemeContext';
 import Homescreen from './Homescreen';
 import SettingsScreen from "./SettingsScreen";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeProvider } from "styled-components/native";
-import { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
-const Tab = createBottomTabNavigator();
-const lightTheme = {
-  mode: 'light',
-  background: '#ffffff',
-  text: '#000000',
-};
-const darkTheme = {
-  mode: 'dark',
-  background: '#000000',
-  text: '#ffffff',
-}
+import { useContext } from "react";
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-export default function App() {
-  const [theme, setTheme] = useState(lightTheme);
-  useEffect(() => {
-    const loadTheme = async () => {
-      const savedTheme = await AsyncStorage.getItem('theme');
-      if (savedTheme) {
-        setTheme(savedTheme === 'dark' ? darkTheme : lightTheme);
-      }
-    };
-    loadTheme();
-  }, []);
-  const toggleTheme = async () => {
-    const newTheme = theme.mode === 'light' ? darkTheme : lightTheme;
-    setTheme(newTheme);
-    await AsyncStorage.setItem('theme', newTheme.mode);
-  };
+const Tab = createBottomTabNavigator();
+const AppNavigator = () => {
+  const { isDarkTheme } = useContext(ThemeContext);
+
   return (
     <ThemeProvider theme={theme}> 
-   <NavigationContainer>
+   <NavigationContainer theme={isDarkTheme ? darkTheme : lightTheme}>
     <Tab.Navigator>
       <Tab.Screen name='Home' component={Homescreen} />
-      <Tab.Screen name='Settings'>
-      { () => <SettingsScreen toggleTheme={toggleTheme} />} 
-       </Tab.Screen> 
+      <Tab.Screen name='Settings' component={SettingsScreen}/>
       </Tab.Navigator>
    </NavigationContainer>
    </ThemeProvider>
-
-
   );
-}
+};
+
+const lightTheme = {
+  dark: false,
+  colors: {
+    primary: 'white',
+    background: 'white',
+    card: 'white',
+    text: 'black',
+    border: 'gray',
+  },
+};
+const darkTheme = {
+  dark: true,
+  colors: {
+    primary: 'black',
+    background: 'black',
+    card: 'black',
+    text: 'white',
+    border: 'gray',
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppNavigator/>
+    </ThemeProvider>
+  );
+  }
+  
+
 

@@ -1,5 +1,7 @@
 import { View, Text, SafeAreaView, Image, ScrollView , StyleSheet} from "react-native";
 import IconButton from './components/IconButton';
+import { ThemeContext } from "./components/ThemeContext";
+import { useContext } from "react";
 
 <image source={require('./assets/card.png')}/>
 const buttons = [
@@ -17,7 +19,9 @@ const activitiesData = [
 ];
  
 const Homescreen = () => {
-    return (
+    const { isDarkTheme } = useContext(ThemeContext);
+    const styles = isDarkTheme ? darkStyles : lightStyles;
+  return (
       <SafeAreaView style={styles.container}>
        <ScrollView>
         <View style={styles.header}>
@@ -25,7 +29,7 @@ const Homescreen = () => {
         <Image source={require('./assets/profile.png')} />
         </View>
         <View>
-        <Text style={styles.title}>{'Welcome Back'}</Text>
+        <Text style={styles.title}>{'Welcome Back,'}</Text>
         <Text style={styles.name}>{'Samuel Tandoh'}</Text>
         <View>
         <Image source={require('./assets/search.png')} />
@@ -45,18 +49,36 @@ const Homescreen = () => {
         </ScrollView>
         </SafeAreaView>
 
-        
     );
 };
 
-const styles = StyleSheet.create({
+export default function Homescreen() {
+  
+} 
+
+const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start",
+    backgroundColor: "white",
   },
   text: {
     fontSize: 20,
+    color: "black",
   },
 });
-export default Homescreen;
+
+const darkStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    backgroundColor: "dark",
+  },
+  text: {
+    fontSize: 20,
+    color: "white",
+  },
+});
+
