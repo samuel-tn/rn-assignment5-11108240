@@ -1,18 +1,18 @@
-import React, { useContext } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { useContext } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import { ThemeContext } from "./components/ThemeContext";
+import IconButton from "./components/IconButton";
 
 const SettingsScreen = () => {
     const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
     const styles = isDarkTheme ? darkStyles : lightStyles;
     return (
         <View styles={styles.container}>
-            <Text style={styles.text}>Settings</Text>
-            <Button title="Theme" onPress={toggleTheme} />
+            <Text style={styles.text} Image source={require('./assets/settings.png')}>Settings</Text>
+            <IconButton title="Theme" onPress={toggleTheme} />
         </View>
     );
 };
-export default function SettingsScreen() {};
 const lightStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -39,3 +39,4 @@ const darkStyles = StyleSheet.create({
     },
 });
 
+export default SettingsScreen;

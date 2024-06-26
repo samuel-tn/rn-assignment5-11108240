@@ -4,24 +4,20 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ThemeProvider, ThemeContext } from './components/ThemeContext';
 import Homescreen from './Homescreen';
 import SettingsScreen from "./SettingsScreen";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeProvider } from "styled-components/native";
 import { useContext } from "react";
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   const { isDarkTheme } = useContext(ThemeContext);
 
   return (
-    <ThemeProvider theme={theme}> 
    <NavigationContainer theme={isDarkTheme ? darkTheme : lightTheme}>
     <Tab.Navigator>
       <Tab.Screen name='Home' component={Homescreen} />
-      <Tab.Screen name='Settings' component={SettingsScreen}/>
+      <Tab.Screen name='Settings'> {() => <SettingsScreen toggleTheme={toggleTheme} />}
+      </Tab.Screen>
       </Tab.Navigator>
    </NavigationContainer>
-   </ThemeProvider>
   );
 };
 

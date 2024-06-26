@@ -18,7 +18,7 @@ const activitiesData = [
   { id: '1', icon: require('./assets/grocery.png'), title: 'Grocery', label: 'Shopping', amount:'-$88'},
 ];
  
-const Homescreen = () => {
+const Homescreen = ({ navigation }) => {
     const { isDarkTheme } = useContext(ThemeContext);
     const styles = isDarkTheme ? darkStyles : lightStyles;
   return (
@@ -37,24 +37,11 @@ const Homescreen = () => {
         </View>
             <Text style={styles.subtitle}>Transaction</Text>
         </View>
-        <View style={styles.Button}>
-          {buttons.map(button => (
-            <IconButton 
-            key={button.id} 
-            buttonIcon={button.icon} 
-            buttonText={button.label} 
-            />
-          ))}
-        </View>
         </ScrollView>
         </SafeAreaView>
 
     );
 };
-
-export default function Homescreen() {
-  
-} 
 
 const lightStyles = StyleSheet.create({
   container: {
@@ -82,3 +69,4 @@ const darkStyles = StyleSheet.create({
   },
 });
 
+export default Homescreen;

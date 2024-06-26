@@ -1,14 +1,13 @@
-import React from "react";
 import React, {useContext} from 'react';
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { ThemeContext } from "./ThemeContext";
 
-const IconButton = ({ title, onPress, style, textStyle }) => {
+const IconButton = ({ title, onPress }) => {
     const { isDarkTheme } = useContext(ThemeContext);
     const buttonStyles = isDarkTheme ? darkStyles : lightStyles;
     return(
-        <TouchableOpacity style={[buttonStyles.button]} onPress={onPress}>
-            <Text style={[buttonStyles.text]}>{title}</Text>
+        <TouchableOpacity style={StyleSheet.button} onPress={onPress}>
+            <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
     );
 };
