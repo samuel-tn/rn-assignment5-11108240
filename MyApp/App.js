@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Homescreen from './Homescreen';
-import SettingsScreen from './SettingsScreen';
+import SettingsScreen from "./SettingsScreen";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeProvider } from "styled-components/native";
 import { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 const Tab = createBottomTabNavigator();
 const lightTheme = {
   mode: 'light',
@@ -39,11 +39,14 @@ export default function App() {
    <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen name='Home' component={Homescreen} />
-      <Tab.Screen name='Settings'> {() => <SettingsScreen toggleTheme={toggleTheme} />}
-      </Tab.Screen>
+      <Tab.Screen name='Settings'>
+      { () => <SettingsScreen toggleTheme={toggleTheme} />} 
+       </Tab.Screen> 
       </Tab.Navigator>
    </NavigationContainer>
    </ThemeProvider>
+
+
   );
 }
 

@@ -1,16 +1,24 @@
 import React from "react";
-import { View, Text, Switch } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useTheme } from "styled-components/native";
+import { View, Text, Switch, StyleSheet } from "react-native";
 
-const SettingsScreen = ({ toggleTheme}) => {
+const SettingsScreen = () => {
     const theme = useTheme();
     return (
-        <View>
-            <Text>Settings Screen</Text>
-            <Switch value={theme.mode === 'dark'}
-            onValueChange={toggleTheme} />
+        <View styles={styles.container}>
+            <Text style={styles.text}>Settings</Text>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+    },
+    text: {
+        fontsize: 20,
+    },
+});
+
 export default SettingsScreen;
