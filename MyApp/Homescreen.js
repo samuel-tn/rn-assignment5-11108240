@@ -1,5 +1,4 @@
 import { View, Text, SafeAreaView, Image, ScrollView , StyleSheet} from "react-native";
-import IconButton from './components/IconButton';
 import { ThemeContext } from "./components/ThemeContext";
 import { useContext } from "react";
 
@@ -17,6 +16,7 @@ const activitiesData = [
   { id: '1', icon: require('./assets/moneyTransferring.png'), title: 'Money Transfer', label: 'Transaction', amount:'$300'},
   { id: '1', icon: require('./assets/grocery.png'), title: 'Grocery', label: 'Shopping', amount:'-$88'},
 ];
+
  
 const Homescreen = ({ navigation }) => {
     const { isDarkTheme } = useContext(ThemeContext);
